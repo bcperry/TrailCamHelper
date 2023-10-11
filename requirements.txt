@@ -4,5 +4,6 @@ torch
 torchvision
 torchaudio
 transformers[torch]
-Pillow
-timm
+pillow
+ExifRead
+lat-lon-parser
