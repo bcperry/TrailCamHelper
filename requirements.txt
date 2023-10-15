@@ -7,3 +7,5 @@ transformers[torch]
 pillow
 ExifRead
 lat-lon-parser
+ffmpeg-python
+streamlit
