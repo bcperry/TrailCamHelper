@@ -9,3 +9,4 @@ ExifRead
 lat-lon-parser
 ffmpeg-python
 streamlit
+fastapi[all]
