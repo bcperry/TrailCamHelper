@@ -1,3 +1,4 @@
+--extra-index-url https://download.pytorch.org/whl/cu118
 jupyterlab
 torch
 torchvision
@@ -9,4 +10,4 @@ lat-lon-parser
 ffmpeg-python
 streamlit
 fastapi[all]
-opencv-python
+opencv-python-headless
