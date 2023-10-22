@@ -11,3 +11,4 @@ ffmpeg-python
 streamlit
 fastapi[all]
 opencv-python-headless
+timm
