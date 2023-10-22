@@ -19,13 +19,19 @@ from torchvision.transforms.functional import pil_to_tensor, to_pil_image
 @st.cache_resource
 def load_model():
     st.header("Deer Detection Model")
-    processor = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50")
     model = DetrForObjectDetection.from_pretrained("facebook/detr-resnet-50")
-    st.success("Loaded model!")
 
     model.eval()
 
-    return processor, model
+    return model
+
+# start with important models and helpers
+@st.cache_resource
+def load_processor():
+    processor = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50")
+
+    return processor
+
 
 large_animal_list = [19, 20, 21, 23, 24, 25]
 
@@ -42,7 +48,8 @@ st.title('TrailCam Helper')
 #     response = requests.post(url=url, files=multi_files)
 #     return response
 
-processor, model = load_model()
+model = load_model()
+processor = load_processor()
 
 confidence = st.slider('What level of confidence to find deer', 0, 100, 80, help="Lower confidence will find more animals, but may have false positives.")
 
