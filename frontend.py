@@ -5,6 +5,7 @@ import requests
 from PIL import Image
 import io
 import zipfile
+import tempfile
 
 import cv2
 
@@ -78,10 +79,10 @@ if len(data) > 0:
         if 'video' in file.type:
             st.write('video loading...')
 
-            with open(file.name, mode='wb') as f:
-                f.write(file.read(), ) # save video to disk
+            tfile = tempfile.NamedTemporaryFile(delete=False)
+            tfile.write(file.read())
+            vidcap = cv2.VideoCapture(tfile.name)
 
-            vidcap = cv2.VideoCapture(file.name) # load video from disk
             cur_frame = 0
 
             success, frame = vidcap.read() # get next frame from video
