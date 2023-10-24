@@ -6,6 +6,7 @@ from PIL import Image
 import io
 import zipfile
 import tempfile
+import gc
 
 import cv2
 
@@ -144,12 +145,15 @@ if len(data) > 0:
     with zipfile.ZipFile(zip_buffer, "a", zipfile.ZIP_DEFLATED, False) as zip_file:
         for file in detection_list:
             zip_file.writestr(file.name, file.getvalue())
+    
 
-    st.download_button("Download Images/Videos with Deer",
+    if st.download_button("Download Images/Videos with Deer",
                        file_name="deerImages.zip",
                        mime="application/zip",
                        data=zip_buffer
-                       )
+                       ):
+
+        gc.collect()
 
     
     
