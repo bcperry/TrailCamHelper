@@ -6,6 +6,3 @@ the frontend uses Streamlit to provide information to the users
 to start the frontend, use
 streamlit run frontend.py
 
-the backend uses FastAPI to provide access to the model
- to start the backend, use: 
- uvicorn backend:app --reload
