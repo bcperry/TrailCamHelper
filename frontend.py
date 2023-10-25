@@ -10,7 +10,8 @@ import gc
 import cv2
 
 import torch
-from transformers import DetrImageProcessor, DetrForObjectDetection
+# from transformers import DetrImageProcessor, DetrForObjectDetection
+from transformers import YolosImageProcessor, YolosForObjectDetection
 
 from torchvision.utils import draw_bounding_boxes
 from torchvision.transforms.functional import pil_to_tensor, to_pil_image
@@ -19,7 +20,7 @@ from torchvision.transforms.functional import pil_to_tensor, to_pil_image
 @st.cache_resource
 def load_model():
     st.header("Deer Detection Model")
-    model = DetrForObjectDetection.from_pretrained("facebook/detr-resnet-50")
+    model = YolosForObjectDetection.from_pretrained('hustvl/yolos-tiny')
 
     model.eval()
 
@@ -28,7 +29,7 @@ def load_model():
 # start with important models and helpers
 @st.cache_resource
 def load_processor():
-    processor = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50")
+    processor = YolosImageProcessor.from_pretrained("hustvl/yolos-tiny")
 
     return processor
 
@@ -94,6 +95,7 @@ if len(data) > 0:
 
             success, frame = vidcap.read() # get next frame from video
             image = Image.fromarray(frame[:,:,[2,1,0]]) # convert opencv frame (with type()==numpy) into PIL Image
+            vidcap.release()
 
         else:
 
@@ -135,9 +137,10 @@ if len(data) > 0:
                         )
             
             st.image(im)
+
     
 
-    # write the iamges to a zip folder for download
+    # write the images to a zip folder for download
 
     zip_buffer = io.BytesIO()
 
